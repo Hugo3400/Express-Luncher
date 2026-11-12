@@ -11,6 +11,7 @@
 ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge)
 ![Vibe coded](https://img.shields.io/badge/vibe-coded-ff3d77?style=for-the-badge)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f?style=for-the-badge)](LICENSE)
 
 [![Stars](https://img.shields.io/github/stars/Hugo3400/Express-Luncher?style=flat-square&color=ff3d77)](https://github.com/Hugo3400/Express-Luncher/stargazers)
 [![Issues](https://img.shields.io/github/issues/Hugo3400/Express-Luncher?style=flat-square&color=ff8a3d)](https://github.com/Hugo3400/Express-Luncher/issues)
@@ -71,7 +72,7 @@ Les idées, retours et signalements de bugs sont les bienvenus : ouvrez une **[i
 
 ### 📄 Licence
 
-La licence n'est pas encore définie. Tant qu'aucune licence n'est publiée, tous les droits sont réservés.
+Projet distribué sous licence **[MIT](LICENSE)** : vous pouvez l'utiliser, le modifier et le redistribuer librement, à condition de conserver la mention de copyright.
 
 <p align="right"><a href="#top">⬆️ Retour en haut</a></p>
 
@@ -126,7 +127,7 @@ Ideas, feedback and bug reports are welcome: please open an **[issue](https://gi
 
 ### 📄 License
 
-No license has been chosen yet. Until one is published, all rights are reserved.
+Released under the **[MIT license](LICENSE)**: you are free to use, modify and redistribute it, as long as the copyright notice is kept.
 
 <p align="right"><a href="#top">⬆️ Back to top</a></p>
 
