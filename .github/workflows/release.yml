@@ -1,0 +1,93 @@
+name: Release
+
+# Publie une release GitHub quand un tag « v* » est poussé (ex. v0.2.0) :
+# compile l'exe autonome, le zippe en ExpressLuncher-win-x64.zip et l'attache à la release.
+# Le tag pilote la version : l'exe est compilé avec -p:Version=<tag sans le « v »>.
+# Le nom du zip est celui que cherche le launcher (GitHubUpdateService.DefaultAssetName).
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+jobs:
+  release:
+    name: Publier la release
+    runs-on: windows-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write # créer la release et y attacher le zip
+    env:
+      # Le nom du tag passe par l'environnement, jamais par interpolation directe dans les scripts.
+      TAG: ${{ github.ref_name }}
+      ASSET: ExpressLuncher-win-x64.zip
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Lire la version depuis le tag
+        shell: pwsh
+        run: |
+          if ($env:TAG -notmatch '^v(?<version>\d+\.\d+\.\d+)(?<suffix>-[0-9A-Za-z.-]+)?$') {
+            Write-Host "::error::Tag invalide : attendu vMAJEUR.MINEUR.CORRECTIF (ex. v0.2.0), avec un suffixe facultatif pour une préversion (ex. v0.2.0-beta.1)."
+            exit 1
+          }
+          $version = $Matches['version']
+          $suffix = $Matches['suffix']
+
+          [xml]$props = Get-Content -Raw Directory.Build.props
+          $declared = @($props.Project.PropertyGroup.Version | Where-Object { $_ })[0]
+          if ($declared -ne $version) {
+            Write-Host "::warning file=Directory.Build.props::Directory.Build.props déclare la version $declared alors que le tag publie $version : pensez à aligner <Version>."
+          }
+
+          "VERSION=$version$suffix" >> $env:GITHUB_ENV
+          "VERSION_NUMBER=$version" >> $env:GITHUB_ENV
+          "PRERELEASE=$(if ($suffix) { 'true' } else { 'false' })" >> $env:GITHUB_ENV
+
+      - name: Publier l'application (exe autonome, un seul fichier)
+        shell: pwsh
+        run: >
+          dotnet publish src/ExpressLuncher/ExpressLuncher.csproj
+          -c Release -r win-x64 --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=true
+          -p:DebugType=none
+          "-p:Version=$env:VERSION"
+          -o publish
+
+      - name: Créer le zip
+        shell: pwsh
+        run: |
+          $exe = Get-Item publish/ExpressLuncher.exe -ErrorAction Stop
+
+          # Garde-fou : la version embarquée dans l'exe doit être celle du tag.
+          $fileVersion = $exe.VersionInfo.FileVersion
+          if (-not "$fileVersion".StartsWith("$env:VERSION_NUMBER.")) {
+            Write-Host "::error::L'exe publié porte la version $fileVersion au lieu de $env:VERSION_NUMBER."
+            exit 1
+          }
+
+          Compress-Archive -Path publish/* -DestinationPath $env:ASSET -CompressionLevel Optimal
+          Get-ChildItem publish, $env:ASSET | Format-Table Name, Length
+
+      - name: Créer la release GitHub
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          $options = @('--title', "Express Luncher $env:TAG", '--generate-notes', '--verify-tag')
+          if ($env:PRERELEASE -eq 'true') { $options += '--prerelease' }
+          gh release create $env:TAG $env:ASSET @options
