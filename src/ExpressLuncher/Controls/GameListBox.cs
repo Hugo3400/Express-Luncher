@@ -95,8 +95,13 @@ public sealed class GameListBox : ListBox
             default: return false;
         }
 
-        // En bout de rangée « en ligne », on laisse les flèches verticales quitter la liste.
-        if (target < 0 || target >= count) return key is Key.Left or Key.Right || panel.ScrollOwner is not null;
+        if (target < 0 || target >= count)
+        {
+            // En bout de rangée « en ligne », les flèches verticales quittent la liste.
+            if (panel.ScrollOwner is null && key is Key.Up or Key.Down && Keyboard.FocusedElement is UIElement focused)
+                focused.MoveFocus(new TraversalRequest(key == Key.Up ? FocusNavigationDirection.Up : FocusNavigationDirection.Down));
+            return true;
+        }
 
         MoveTo(target);
         return true;
