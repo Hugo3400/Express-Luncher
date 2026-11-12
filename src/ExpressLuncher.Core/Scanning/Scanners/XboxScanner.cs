@@ -188,8 +188,9 @@ public sealed class XboxScanner : IGameScanner
         var matches = packages.Where(p => p.FullName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)).ToList();
         if (matches.Count == 0) return null;
 
-        var best = matches.FirstOrDefault(p => SamePath(p.RootFolder, contentDir));
-        var fullName = best.FullName ?? matches[0].FullName;
+        // plusieurs versions enregistrées : celle installée dans ce dossier d'abord
+        var exact = matches.FindIndex(p => SamePath(p.RootFolder, contentDir));
+        var fullName = matches[Math.Max(exact, 0)].FullName;
 
         var publisherId = fullName[(fullName.LastIndexOf('_') + 1)..];
         return publisherId.Length == 0 ? null : $"{identityName}_{publisherId}";

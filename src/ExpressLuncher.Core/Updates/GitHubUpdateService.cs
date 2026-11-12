@@ -276,7 +276,7 @@ public sealed class GitHubUpdateService : IUpdateService
                 .ConfigureAwait(false);
 
             // github.com redirige vers son CDN : la destination finale doit rester chez GitHub, en https.
-            if (response.RequestMessage?.RequestUri is not { } finalUri || !IsTrustedUri(finalUri))
+            if (!IsTrustedUri(response.RequestMessage?.RequestUri ?? uri))
                 throw new InvalidOperationException(
                     "Le téléchargement de la mise à jour a été redirigé hors de GitHub : il a été annulé.");
 
