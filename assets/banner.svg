@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-label="Express Luncher">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1226"/>
+      <stop offset="1" stop-color="#1e1548"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9a3d"/>
+      <stop offset="1" stop-color="#ff3d77"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.28" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#ff5c6c" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#ff5c6c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity="0.06"/>
+    </pattern>
+    <clipPath id="frame">
+      <rect width="1280" height="320" rx="24"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="1280" height="320" fill="url(#bg)"/>
+    <rect width="1280" height="320" fill="url(#dots)"/>
+    <rect width="1280" height="320" fill="url(#glow)"/>
+    <rect y="314" width="1280" height="6" fill="url(#accent)"/>
+  </g>
+
+  <!-- speed lines -->
+  <rect x="170" y="118" width="96" height="10" rx="5" fill="url(#accent)" fill-opacity="0.90"/>
+  <rect x="130" y="155" width="136" height="10" rx="5" fill="url(#accent)" fill-opacity="0.60"/>
+  <rect x="190" y="192" width="76" height="10" rx="5" fill="url(#accent)" fill-opacity="0.35"/>
+
+  <!-- play icon -->
+  <rect x="290" y="90" width="140" height="140" rx="34" fill="url(#accent)"/>
+  <path d="M344 130 L344 190 L394 160 Z" fill="#ffffff" stroke="#ffffff" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- title -->
+  <text x="470" y="170" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="76" font-weight="800" fill="#ffffff">Express <tspan fill="url(#accent)">Luncher</tspan></text>
+  <text x="474" y="216" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="21" font-weight="600" letter-spacing="5" fill="#b9bde0">GAME LAUNCHER  ·  WINDOWS  ·  .NET</text>
+</svg>

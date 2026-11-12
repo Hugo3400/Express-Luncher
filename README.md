@@ -1,75 +1,130 @@
-# Express Luncher
+<a id="top"></a>
 
-**[Français](#francais)** · **[English](#english)**
+<div align="center">
 
----
+<img src="assets/banner.svg" alt="Express Luncher — game launcher for Windows" width="100%">
+
+<br><br>
+
+![Status](https://img.shields.io/badge/status-in%20development-ff8a3d?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-Windows-0078D4?style=for-the-badge)
+![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge)
+
+[![Stars](https://img.shields.io/github/stars/Hugo3400/Express-Luncher?style=flat-square&color=ff3d77)](https://github.com/Hugo3400/Express-Luncher/stargazers)
+[![Issues](https://img.shields.io/github/issues/Hugo3400/Express-Luncher?style=flat-square&color=ff8a3d)](https://github.com/Hugo3400/Express-Luncher/issues)
+![Last commit](https://img.shields.io/github/last-commit/Hugo3400/Express-Luncher?style=flat-square&color=512BD4)
+
+### 🇫🇷 [Français](#francais) &nbsp;·&nbsp; 🇬🇧 [English](#english)
+
+</div>
+
+<br>
 
 <a id="francais"></a>
 
-## Français
+## 🇫🇷 Français
 
-Express Luncher est un launcher de jeu pour Windows, développé en C# / .NET. Son but : installer le jeu, le garder à jour et le lancer en un clic.
+**Express Luncher** est un launcher de jeu pour Windows, développé en **C# / .NET**.
+Son but : installer le jeu, le garder à jour et le lancer en un clic. 🚀
 
-> **État du projet : en tout début de développement.** Le code source n'est pas encore publié et aucune version n'est téléchargeable pour le moment.
+> [!NOTE]
+> **Projet en tout début de développement.** Le code source n'est pas encore publié et aucune version n'est téléchargeable pour le moment.
 
-### Fonctionnalités prévues
+### ✨ Fonctionnalités prévues
 
-- Lancement du jeu en un clic
-- Téléchargement et installation automatiques des mises à jour
-- Connexion au compte du joueur
-- Affichage des actualités du jeu
-- Réglages (dossier d'installation, options de lancement)
+|     | Fonctionnalité | Description |
+| :-: | :-- | :-- |
+| ▶️ | **Lancement en un clic** | Démarrer le jeu directement depuis le launcher |
+| 🔄 | **Mises à jour automatiques** | Téléchargement et installation sans intervention |
+| 👤 | **Connexion au compte** | Identification du joueur depuis le launcher |
+| 📰 | **Actualités** | Les dernières nouvelles du jeu sur l'écran d'accueil |
+| ⚙️ | **Réglages** | Dossier d'installation et options de lancement |
 
 Cette liste décrit l'objectif du projet, pas ce qui existe déjà. Elle évoluera avec le développement.
 
-### Installation
+### 🗺️ Feuille de route
 
-Aucune version n'est encore disponible. Quand ce sera le cas, les téléchargements seront publiés dans l'onglet [Releases](https://github.com/Hugo3400/Express-Luncher/releases).
+- [x] Création du dépôt
+- [ ] Structure du projet .NET
+- [ ] Interface du launcher
+- [ ] Lancement du jeu
+- [ ] Système de mise à jour
+- [ ] Première version publique
 
-### Compiler depuis les sources
+### 📦 Installation
+
+Aucune version n'est encore disponible. Les téléchargements seront publiés dans l'onglet **[Releases](https://github.com/Hugo3400/Express-Luncher/releases)**.
+
+### 🛠️ Compiler depuis les sources
 
 Les instructions de compilation seront ajoutées en même temps que le code source. Le projet ciblera Windows et nécessitera le [SDK .NET](https://dotnet.microsoft.com/download).
 
-### Contribuer
+### 🤝 Contribuer
 
-Les idées, retours et signalements de bugs sont les bienvenus : ouvrez une [issue](https://github.com/Hugo3400/Express-Luncher/issues).
+Les idées, retours et signalements de bugs sont les bienvenus : ouvrez une **[issue](https://github.com/Hugo3400/Express-Luncher/issues)**.
 
-### Licence
+### 📄 Licence
 
 La licence n'est pas encore définie. Tant qu'aucune licence n'est publiée, tous les droits sont réservés.
+
+<p align="right"><a href="#top">⬆️ Retour en haut</a></p>
 
 ---
 
 <a id="english"></a>
 
-## English
+## 🇬🇧 English
 
-Express Luncher is a game launcher for Windows, built with C# / .NET. Its goal: install the game, keep it up to date and start it in one click.
+**Express Luncher** is a game launcher for Windows, built with **C# / .NET**.
+Its goal: install the game, keep it up to date and start it in one click. 🚀
 
-> **Project status: very early development.** The source code is not published yet and there is no downloadable release at this time.
+> [!NOTE]
+> **Very early development.** The source code is not published yet and there is no downloadable release at this time.
 
-### Planned features
+### ✨ Planned features
 
-- One-click game launch
-- Automatic download and installation of updates
-- Player account sign-in
-- Game news feed
-- Settings (install folder, launch options)
+|     | Feature | Description |
+| :-: | :-- | :-- |
+| ▶️ | **One-click launch** | Start the game straight from the launcher |
+| 🔄 | **Automatic updates** | Downloaded and installed without any manual step |
+| 👤 | **Account sign-in** | Player login from inside the launcher |
+| 📰 | **News feed** | The latest game news on the home screen |
+| ⚙️ | **Settings** | Install folder and launch options |
 
 This list describes where the project is headed, not what exists today. It will change as development moves forward.
 
-### Installation
+### 🗺️ Roadmap
 
-No release is available yet. Once there is one, downloads will be published under [Releases](https://github.com/Hugo3400/Express-Luncher/releases).
+- [x] Repository created
+- [ ] .NET project structure
+- [ ] Launcher interface
+- [ ] Game launch
+- [ ] Update system
+- [ ] First public release
 
-### Building from source
+### 📦 Installation
+
+No release is available yet. Downloads will be published under **[Releases](https://github.com/Hugo3400/Express-Luncher/releases)**.
+
+### 🛠️ Building from source
 
 Build instructions will be added along with the source code. The project will target Windows and require the [.NET SDK](https://dotnet.microsoft.com/download).
 
-### Contributing
+### 🤝 Contributing
 
-Ideas, feedback and bug reports are welcome: please open an [issue](https://github.com/Hugo3400/Express-Luncher/issues).
+Ideas, feedback and bug reports are welcome: please open an **[issue](https://github.com/Hugo3400/Express-Luncher/issues)**.
 
-### License
+### 📄 License
 
 No license has been chosen yet. Until one is published, all rights are reserved.
+
+<p align="right"><a href="#top">⬆️ Back to top</a></p>
+
+---
+
+<div align="center">
+
+Made with ❤️ by <a href="https://github.com/Hugo3400">Hugo3400</a>
+
+</div>
