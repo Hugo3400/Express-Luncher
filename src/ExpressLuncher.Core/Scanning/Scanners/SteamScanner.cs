@@ -7,6 +7,7 @@ namespace ExpressLuncher.Core.Scanning.Scanners;
 
 /// <summary>
 /// Jeux Steam : lit libraryfolders.vdf pour trouver les bibliothèques, puis les appmanifest_*.acf de chacune.
+/// Temps de jeu et illustrations viennent des données locales du client (localconfig.vdf, librarycache).
 /// </summary>
 public sealed class SteamScanner : IGameScanner
 {
@@ -59,6 +60,7 @@ public sealed class SteamScanner : IGameScanner
         steamRoot = libraries.FirstOrDefault(l => string.Equals(l, steamRoot, StringComparison.OrdinalIgnoreCase))
                     ?? steamRoot;
 
+        var playStats = ReadPlayStats(steamRoot);
         var games = new List<Game>();
         var seenAppIds = new HashSet<string>(StringComparer.Ordinal);
 
@@ -75,7 +77,7 @@ public sealed class SteamScanner : IGameScanner
                 cancellationToken.ThrowIfCancellationRequested();
                 try
                 {
-                    var game = ReadManifest(manifest, library, steamRoot);
+                    var game = ReadManifest(manifest, library, steamRoot, playStats);
                     if (game is not null && seenAppIds.Add(game.Id)) games.Add(game);
                 }
                 catch
@@ -172,7 +174,8 @@ public sealed class SteamScanner : IGameScanner
 
     // ---- Lecture d'un appmanifest ----
 
-    private static Game? ReadManifest(string manifestFile, string library, string steamRoot)
+    private static Game? ReadManifest(
+        string manifestFile, string library, string steamRoot, Dictionary<string, PlayStats> playStats)
     {
         var root = ParseVdf(ReadText(manifestFile));
         if (!root.Children.TryGetValue("AppState", out var app)) return null;
