@@ -39,6 +39,7 @@ public sealed class GameScanService
         new RockstarScanner(),
         new AmazonScanner(),
         new ItchScanner(),
+        new StandaloneScanner(),
     ]);
 
     public async Task<ScanResult> ScanAllAsync(

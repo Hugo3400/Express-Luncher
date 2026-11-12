@@ -14,6 +14,8 @@ public enum GameSource
     Rockstar,
     Amazon,
     Itch,
+    /// <summary>Jeu ou client installé hors boutique et reconnu automatiquement (FiveM, RedM, Roblox...).</summary>
+    Standalone,
     /// <summary>Jeu ajouté à la main par l'utilisateur (un .exe).</summary>
     Manual,
 }
