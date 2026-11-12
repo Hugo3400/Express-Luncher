@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RootNamespace>ExpressLuncher.Core</RootNamespace>
+    <Description>Détection des jeux installés (Steam, Epic, GOG, ...), bibliothèque et mise à jour via GitHub pour Express Luncher.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>

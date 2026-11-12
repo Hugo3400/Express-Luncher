@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ExpressLuncher.Core/ExpressLuncher.Core.csproj" />
+    <Project Path="src/ExpressLuncher/ExpressLuncher.csproj" />
+  </Folder>
+</Solution>

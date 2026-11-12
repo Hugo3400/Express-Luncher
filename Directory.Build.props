@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <!-- Version unique du launcher. Le tag de release GitHub doit valoir "v" + cette version (ex. v0.1.0). -->
+    <Version>0.1.0</Version>
+    <Authors>Hugo3400</Authors>
+    <Product>Express Luncher</Product>
+    <RepositoryUrl>https://github.com/Hugo3400/Express-Luncher</RepositoryUrl>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+</Project>
