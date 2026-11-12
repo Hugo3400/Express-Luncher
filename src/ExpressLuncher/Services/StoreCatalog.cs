@@ -21,11 +21,15 @@ public static class StoreCatalog
         [GameSource.Rockstar] = Make(GameSource.Rockstar, "Rockstar Games", "#FCAF17"),
         [GameSource.Amazon] = Make(GameSource.Amazon, "Amazon Games", "#FF9900"),
         [GameSource.Itch] = Make(GameSource.Itch, "itch.io", "#FA5C5C"),
+        [GameSource.Standalone] = Make(GameSource.Standalone, "Autres", "#7FD1C1"),
         [GameSource.Manual] = Make(GameSource.Manual, "Ajout manuel", "#8E8E9A"),
     };
 
+    private static readonly Brush UnknownBrush = Make(GameSource.Manual, "", "#8E8E9A").Brush;
+
+    /// <summary>Une source inconnue (ajoutée plus tard dans Core) est rangée sous « Autres ».</summary>
     public static StoreInfo Get(GameSource source) =>
-        Stores.TryGetValue(source, out var info) ? info : Make(source, source.ToString(), "#8E8E9A");
+        Stores.TryGetValue(source, out var info) ? info : new StoreInfo(source, "Autres", UnknownBrush);
 
     private static StoreInfo Make(GameSource source, string name, string color)
     {

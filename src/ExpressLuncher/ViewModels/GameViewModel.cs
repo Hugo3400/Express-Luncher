@@ -11,7 +11,8 @@ namespace ExpressLuncher.ViewModels;
 public interface IGameActions
 {
     void Play(GameViewModel game);
-    void OpenDetails(GameViewModel game);
+    /// <param name="fromCard">Vrai si la fiche est ouverte par un clic sur une carte (un double-clic lance alors le jeu).</param>
+    void OpenDetails(GameViewModel game, bool fromCard);
     void ToggleFavorite(GameViewModel game);
     void ToggleHidden(GameViewModel game);
     void OpenFolder(GameViewModel game);
@@ -50,7 +51,7 @@ public sealed class GameViewModel : ObservableObject
         _logo = new LazyImage(images, ImageKind.Logo, () => Game.LogoPath, () => OnPropertyChanged(nameof(Logo)));
 
         PlayCommand = new RelayCommand(() => actions.Play(this));
-        OpenDetailsCommand = new RelayCommand(() => actions.OpenDetails(this));
+        OpenDetailsCommand = new RelayCommand(parameter => actions.OpenDetails(this, fromCard: parameter is "card"));
         ToggleFavoriteCommand = new RelayCommand(() => actions.ToggleFavorite(this));
         ToggleHiddenCommand = new RelayCommand(() => actions.ToggleHidden(this));
         OpenFolderCommand = new RelayCommand(() => actions.OpenFolder(this), () => CanOpenFolder);
@@ -127,14 +128,8 @@ public sealed class GameViewModel : ObservableObject
         {
             if (_isRunning) return "En cours";
 
-            var detail = (HasPlaytime, LastPlayed) switch
-            {
-                (true, { } date) => $"{Fr.Duration(_playtime)} · {Fr.Relative(date)}",
-                (true, null) => Fr.Duration(_playtime),
-                (false, { } date) => Fr.Relative(date),
-                _ => null,
-            };
-            return detail is null ? StoreName : $"{StoreName} · {detail}";
+            if (HasPlaytime) return $"{StoreName} · {Fr.Duration(_playtime)}";
+            return LastPlayed is { } date ? $"{StoreName} · {Fr.Relative(date)}" : StoreName;
         }
     }
 
