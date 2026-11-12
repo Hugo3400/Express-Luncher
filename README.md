@@ -12,7 +12,7 @@
 ![WPF](https://img.shields.io/badge/UI-WPF-5C2D91?style=for-the-badge)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge)
 ![Vibe coded](https://img.shields.io/badge/vibe-coded-ff3d77?style=for-the-badge)
-[![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f?style=for-the-badge)](LICENSE)
+[![License: source-available](https://img.shields.io/badge/license-source--available-e5534b?style=for-the-badge)](LICENSE)
 
 [![Stars](https://img.shields.io/github/stars/Hugo3400/Express-Luncher?style=flat-square&color=ff3d77)](https://github.com/Hugo3400/Express-Luncher/stargazers)
 [![Issues](https://img.shields.io/github/issues/Hugo3400/Express-Luncher?style=flat-square&color=ff8a3d)](https://github.com/Hugo3400/Express-Luncher/issues)
@@ -85,11 +85,17 @@ Ce projet est **vibe codé** : il est développé avec l'aide d'une IA, à parti
 
 ### 🤝 Contribuer
 
-Les idées, retours et signalements de bugs sont les bienvenus : ouvrez une **[issue](https://github.com/Hugo3400/Express-Luncher/issues)**.
+Les idées, retours, signalements de bugs et corrections sont les bienvenus : ouvrez une **[issue](https://github.com/Hugo3400/Express-Luncher/issues)** ou proposez une **[pull request](https://github.com/Hugo3400/Express-Luncher/pulls)**. Les contributions sont intégrées au projet selon les termes de la [licence](LICENSE).
 
 ### 📄 Licence
 
-Projet distribué sous licence **[MIT](LICENSE)** : vous pouvez l'utiliser, le modifier et le redistribuer librement, à condition de conserver la mention de copyright.
+Le code est **visible, mais pas libre de droits** : tous droits réservés, voir la **[licence](LICENSE)**.
+
+| ✅ Autorisé | ❌ Interdit sans accord écrit |
+| :-- | :-- |
+| Lire le code | Copier le code dans un autre projet |
+| Compiler et utiliser le launcher pour soi | Redistribuer ou revendre le projet, modifié ou non |
+| Contribuer : issues, corrections, pull requests | Présenter le projet comme le sien ou sous un autre nom |
 
 <p align="right"><a href="#top">⬆️ Retour en haut</a></p>
 
@@ -156,11 +162,17 @@ This project is **vibe coded**: it is built with the help of an AI, from natural
 
 ### 🤝 Contributing
 
-Ideas, feedback and bug reports are welcome: please open an **[issue](https://github.com/Hugo3400/Express-Luncher/issues)**.
+Ideas, feedback, bug reports and fixes are welcome: open an **[issue](https://github.com/Hugo3400/Express-Luncher/issues)** or submit a **[pull request](https://github.com/Hugo3400/Express-Luncher/pulls)**. Contributions become part of the project under the terms of the [license](LICENSE).
 
 ### 📄 License
 
-Released under the **[MIT license](LICENSE)**: you are free to use, modify and redistribute it, as long as the copyright notice is kept.
+The code is **source-available, not open source**: all rights reserved, see the **[license](LICENSE)**.
+
+| ✅ Allowed | ❌ Not allowed without written permission |
+| :-- | :-- |
+| Read the code | Copy the code into another project |
+| Build and run the launcher for yourself | Redistribute or sell the project, modified or not |
+| Contribute: issues, fixes, pull requests | Present the project as your own or under another name |
 
 <p align="right"><a href="#top">⬆️ Back to top</a></p>
 

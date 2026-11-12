@@ -1,21 +1,57 @@
-MIT License
+Express Luncher - Source-Available License
 
-Copyright (c) 2026 Hugo3400
+Copyright (c) 2026 Hugo3400. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Ownership
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+   This software and its source code (the "Software") are the exclusive
+   property of the copyright holder. No rights are granted except those
+   expressly stated in this license.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. What you may do
+
+   a. View and read the source code.
+   b. Download, build and run the Software for your own personal,
+      non-commercial use.
+   c. Fork the official repository on GitHub and modify the Software for the
+      sole purpose of submitting contributions (such as pull requests) to the
+      official repository at https://github.com/Hugo3400/Express-Luncher.
+
+3. What you may not do
+
+   Without prior written permission from the copyright holder, you may not:
+
+   a. copy, reuse or incorporate the Software, or any substantial part of it,
+      into another project;
+   b. redistribute, publish, sublicense, rent or sell the Software, whether
+      modified or not;
+   c. present the Software, or any work derived from it, as your own work or
+      under another name;
+   d. remove or alter this license or any copyright notice.
+
+4. Contributions
+
+   Contributions are welcome. By submitting a contribution to the official
+   repository (pull request, patch, or any suggestion containing code), you:
+
+   a. confirm that you have the right to submit it;
+   b. grant the copyright holder a perpetual, worldwide, non-exclusive,
+      royalty-free, irrevocable license to use, modify, distribute and
+      relicense your contribution as part of the Software.
+
+   You keep the credit for your contribution.
+
+5. Termination
+
+   The rights granted in section 2 end automatically if you fail to comply
+   with this license.
+
+6. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+   IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
