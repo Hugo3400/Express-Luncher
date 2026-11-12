@@ -211,6 +211,9 @@ public sealed class SteamScanner : IGameScanner
             ? bytes
             : null;
 
+        var artwork = FindLocalArtwork(steamRoot, appId);
+        playStats.TryGetValue(appId, out var stats);
+
         return new Game
         {
             Id = ScanHelpers.MakeId(GameSource.Steam, appId),
@@ -219,9 +222,13 @@ public sealed class SteamScanner : IGameScanner
             InstallPath = installPath,
             ExecutablePath = ScanHelpers.FindMainExecutable(installPath, name),
             LaunchUri = $"steam://rungameid/{appId}",
-            CoverPath = FindLocalCover(steamRoot, appId)
+            CoverPath = artwork.Cover
                         ?? $"https://shared.steamstatic.com/store_item_assets/steam/apps/{appId}/library_600x900.jpg",
+            HeroPath = artwork.Hero,
+            LogoPath = artwork.Logo,
             SizeBytes = size,
+            StorePlaytimeSeconds = stats.PlaytimeSeconds,
+            StoreLastPlayed = stats.LastPlayed,
         };
     }
 
@@ -250,40 +257,147 @@ public sealed class SteamScanner : IGameScanner
         catch { return true; }
     }
 
-    // ---- Jaquette dans le cache local de Steam ----
+    // ---- Temps de jeu enregistré par le client Steam ----
 
-    private static string? FindLocalCover(string steamRoot, string appId)
+    private readonly record struct PlayStats(long? PlaytimeSeconds, DateTime? LastPlayed);
+
+    /// <summary>
+    /// userdata\&lt;compte&gt;\config\localconfig.vdf → UserLocalConfigStore/Software/Valve/Steam/apps/&lt;appid&gt; :
+    /// "Playtime" en minutes, "LastPlayed" en secondes Unix. Dictionnaire vide si rien n'est lisible.
+    /// </summary>
+    private static Dictionary<string, PlayStats> ReadPlayStats(string steamRoot)
     {
+        var stats = new Dictionary<string, PlayStats>(StringComparer.Ordinal);
+        try
+        {
+            var userData = Path.Combine(steamRoot, "userdata");
+            if (!Directory.Exists(userData)) return stats;
+
+            // Plusieurs comptes possibles : on prend celui dont la configuration a été écrite en dernier.
+            var configFiles = Directory.GetDirectories(userData)
+                .Select(dir => new FileInfo(Path.Combine(dir, "config", "localconfig.vdf")))
+                .Where(file => file.Exists)
+                .OrderByDescending(file => file.LastWriteTimeUtc);
+
+            foreach (var configFile in configFiles)
+            {
+                try
+                {
+                    var apps = FindNode(ParseVdf(ReadText(configFile.FullName)),
+                        "UserLocalConfigStore", "Software", "Valve", "Steam", "apps");
+                    if (apps is null) continue;
+
+                    foreach (var (appId, app) in apps.Children)
+                    {
+                        var entry = new PlayStats(ReadPlaytimeSeconds(app.Get("Playtime")), ReadUnixTime(app.Get("LastPlayed")));
+                        if (entry.PlaytimeSeconds is not null || entry.LastPlayed is not null) stats[appId] = entry;
+                    }
+                    if (stats.Count > 0) break;
+                }
+                catch
+                {
+                    // configuration illisible : on essaie le compte suivant
+                }
+            }
+        }
+        catch
+        {
+            // dossier userdata inaccessible : pas de temps de jeu
+        }
+        return stats;
+    }
+
+    private static VdfNode? FindNode(VdfNode root, params string[] path)
+    {
+        var node = root;
+        foreach (var key in path)
+            if (!node.Children.TryGetValue(key, out node)) return null;
+        return node;
+    }
+
+    private static long? ReadPlaytimeSeconds(string? minutes) =>
+        long.TryParse(minutes, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value)
+        && value is >= 0 and < int.MaxValue
+            ? value * 60
+            : null;
+
+    private static DateTime? ReadUnixTime(string? seconds)
+    {
+        if (!long.TryParse(seconds, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value) || value <= 0)
+            return null;
+        try { return DateTimeOffset.FromUnixTimeSeconds(value).LocalDateTime; }
+        catch (ArgumentOutOfRangeException) { return null; }
+    }
+
+    // ---- Illustrations dans le cache local de Steam ----
+
+    /// <summary>Illustrations d'une application déjà téléchargées par le client Steam.</summary>
+    internal sealed record SteamLocalArtwork(string? Cover, string? Hero, string? Logo);
+
+    private static readonly Lazy<string?> KnownSteamRoot = new(FindSteamRoot);
+
+    /// <summary>Cherche dans le cache du client Steam ; null si Steam n'est pas installé.</summary>
+    internal static SteamLocalArtwork? FindLocalArtwork(string appId)
+    {
+        var steamRoot = KnownSteamRoot.Value;
+        return steamRoot is null || !IsDigits(appId) ? null : FindLocalArtwork(steamRoot, appId);
+    }
+
+    private static SteamLocalArtwork FindLocalArtwork(string steamRoot, string appId)
+    {
+        string? cover = null, hero = null, logo = null;
+        int coverRank = int.MaxValue, heroRank = int.MaxValue, logoRank = int.MaxValue;
+
+        // À rang égal, le premier fichier proposé est conservé.
+        void Offer(string file, string fileName)
+        {
+            var stem = Path.GetFileNameWithoutExtension(fileName);
+            var extension = Path.GetExtension(fileName);
+
+            if (extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase))
+            {
+                Keep(CoverRank(stem), ref coverRank, ref cover);
+                Keep(HeroRank(stem), ref heroRank, ref hero);
+            }
+            else if (extension.Equals(".png", StringComparison.OrdinalIgnoreCase))
+            {
+                Keep(LogoRank(stem), ref logoRank, ref logo);
+            }
+
+            void Keep(int rank, ref int bestRank, ref string? best)
+            {
+                if (rank >= bestRank) return;
+                bestRank = rank;
+                best = file;
+            }
+        }
+
         try
         {
             var cache = Path.Combine(steamRoot, "appcache", "librarycache");
 
             // Ancienne disposition : tout à plat, préfixé par l'appid.
-            var flat = Path.Combine(cache, $"{appId}_library_600x900.jpg");
-            if (File.Exists(flat)) return flat;
-
-            var appDir = Path.Combine(cache, appId);
-            if (!Directory.Exists(appDir)) return null;
+            foreach (var name in new[] { "library_600x900.jpg", "library_hero.jpg", "logo.png" })
+            {
+                var flat = Path.Combine(cache, $"{appId}_{name}");
+                if (File.Exists(flat)) Offer(flat, name);
+            }
 
             // Disposition actuelle : un dossier par appid, parfois un sous-dossier nommé par hash,
             // et selon les jeux "library_600x900", "library_capsule" ou une variante localisée.
-            string? best = null;
-            var bestRank = int.MaxValue;
-            foreach (var file in Directory.EnumerateFiles(appDir, "library_*.jpg", SearchOption.AllDirectories))
+            var appDir = Path.Combine(cache, appId);
+            if (Directory.Exists(appDir))
             {
-                var rank = CoverRank(Path.GetFileNameWithoutExtension(file));
-                if (rank < bestRank)
-                {
-                    bestRank = rank;
-                    best = file;
-                }
+                foreach (var file in Directory.EnumerateFiles(appDir, "*", SearchOption.AllDirectories))
+                    Offer(file, Path.GetFileName(file));
             }
-            return best;
         }
         catch
         {
-            return null;
+            // cache illisible : on garde ce qui a déjà été trouvé
         }
+
+        return new SteamLocalArtwork(cover, hero, logo);
     }
 
     private static int CoverRank(string fileName)
@@ -292,6 +406,21 @@ public sealed class SteamScanner : IGameScanner
         if (fileName.Equals("library_capsule", StringComparison.OrdinalIgnoreCase)) return 1;
         if (fileName.StartsWith("library_600x900_", StringComparison.OrdinalIgnoreCase)) return 2;
         if (fileName.StartsWith("library_capsule_", StringComparison.OrdinalIgnoreCase)) return 3;
+        return int.MaxValue;
+    }
+
+    private static int HeroRank(string fileName)
+    {
+        if (fileName.Equals("library_hero", StringComparison.OrdinalIgnoreCase)) return 0;
+        if (fileName.StartsWith("library_hero_blur", StringComparison.OrdinalIgnoreCase)) return int.MaxValue;
+        if (fileName.StartsWith("library_hero_", StringComparison.OrdinalIgnoreCase)) return 1;
+        return int.MaxValue;
+    }
+
+    private static int LogoRank(string fileName)
+    {
+        if (fileName.Equals("logo", StringComparison.OrdinalIgnoreCase)) return 0;
+        if (fileName.StartsWith("logo_", StringComparison.OrdinalIgnoreCase)) return 1;
         return int.MaxValue;
     }
 
