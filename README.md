@@ -66,17 +66,17 @@ Prérequis : Windows et le [SDK .NET 10](https://dotnet.microsoft.com/download).
 ```powershell
 git clone https://github.com/Hugo3400/Express-Luncher.git
 cd Express-Luncher
-dotnet build ExpressLauncher.slnx
-dotnet run --project src/ExpressLauncher
+dotnet build ExpressLuncher.slnx
+dotnet run --project src/ExpressLuncher
 ```
 
 ### 🧱 Structure du projet
 
 ```text
-ExpressLauncher.slnx          Solution
+ExpressLuncher.slnx          Solution
 src/
-├── ExpressLauncher/          Application WPF (interface)
-└── ExpressLauncher.Core/     Bibliothèque de classes (logique, sans interface)
+├── ExpressLuncher/          Application WPF (interface)
+└── ExpressLuncher.Core/     Bibliothèque de classes (logique, sans interface)
 ```
 
 ### 🤖 Vibe codé
@@ -143,17 +143,17 @@ Requirements: Windows and the [.NET 10 SDK](https://dotnet.microsoft.com/downloa
 ```powershell
 git clone https://github.com/Hugo3400/Express-Luncher.git
 cd Express-Luncher
-dotnet build ExpressLauncher.slnx
-dotnet run --project src/ExpressLauncher
+dotnet build ExpressLuncher.slnx
+dotnet run --project src/ExpressLuncher
 ```
 
 ### 🧱 Project structure
 
 ```text
-ExpressLauncher.slnx          Solution
+ExpressLuncher.slnx          Solution
 src/
-├── ExpressLauncher/          WPF application (user interface)
-└── ExpressLauncher.Core/     Class library (logic, no UI)
+├── ExpressLuncher/          WPF application (user interface)
+└── ExpressLuncher.Core/     Class library (logic, no UI)
 ```
 
 ### 🤖 Vibe coded
