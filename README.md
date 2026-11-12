@@ -10,6 +10,7 @@
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4?style=for-the-badge)
 ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge)
+![Vibe coded](https://img.shields.io/badge/vibe-coded-ff3d77?style=for-the-badge)
 
 [![Stars](https://img.shields.io/github/stars/Hugo3400/Express-Luncher?style=flat-square&color=ff3d77)](https://github.com/Hugo3400/Express-Luncher/stargazers)
 [![Issues](https://img.shields.io/github/issues/Hugo3400/Express-Luncher?style=flat-square&color=ff8a3d)](https://github.com/Hugo3400/Express-Luncher/issues)
@@ -59,6 +60,10 @@ Aucune version n'est encore disponible. Les téléchargements seront publiés da
 ### 🛠️ Compiler depuis les sources
 
 Les instructions de compilation seront ajoutées en même temps que le code source. Le projet ciblera Windows et nécessitera le [SDK .NET](https://dotnet.microsoft.com/download).
+
+### 🤖 Vibe codé
+
+Ce projet est **vibe codé** : il est développé avec l'aide d'une IA, à partir d'instructions en langage naturel. Le code peut donc contenir des imperfections, et les relectures comme les corrections sont les bienvenues.
 
 ### 🤝 Contribuer
 
@@ -111,6 +116,10 @@ No release is available yet. Downloads will be published under **[Releases](http
 
 Build instructions will be added along with the source code. The project will target Windows and require the [.NET SDK](https://dotnet.microsoft.com/download).
 
+### 🤖 Vibe coded
+
+This project is **vibe coded**: it is built with the help of an AI, from natural-language instructions. The code may therefore have rough edges, and reviews and fixes are welcome.
+
 ### 🤝 Contributing
 
 Ideas, feedback and bug reports are welcome: please open an **[issue](https://github.com/Hugo3400/Express-Luncher/issues)**.
@@ -125,6 +134,6 @@ No license has been chosen yet. Until one is published, all rights are reserved.
 
 <div align="center">
 
-Made with ❤️ by <a href="https://github.com/Hugo3400">Hugo3400</a>
+Vibe coded with ❤️ by <a href="https://github.com/Hugo3400">Hugo3400</a>
 
 </div>
