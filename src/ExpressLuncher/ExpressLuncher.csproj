@@ -6,7 +6,13 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>ExpressLuncher</RootNamespace>
     <AssemblyName>ExpressLuncher</AssemblyName>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\app.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ExpressLuncher.Core\ExpressLuncher.Core.csproj" />
