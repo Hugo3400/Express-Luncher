@@ -10,7 +10,7 @@ namespace ExpressLuncher.Core.Scanning.Scanners;
 public sealed class BattleNetScanner : IGameScanner
 {
     private static readonly Regex UidPattern = new(
-        "--uid=(?:\"(?<uid>[^\"]+)\"|(?<uid>\\S+))",
+        "--uid=\"?(?<uid>[^\"\\s]+)",
         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
     // le client lui-même et son agent de mise à jour

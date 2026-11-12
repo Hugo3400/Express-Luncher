@@ -38,6 +38,9 @@ public static class AppInfo
 
     public static string SettingsFile => Path.Combine(DataDirectory, "settings.json");
 
+    /// <summary>Historique des sessions de jeu.</summary>
+    public static string ActivityFile => Path.Combine(DataDirectory, "activity.json");
+
     /// <summary>Cache local (jaquettes téléchargées, icônes...).</summary>
     public static string CacheDirectory
     {

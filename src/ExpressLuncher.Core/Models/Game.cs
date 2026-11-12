@@ -48,8 +48,20 @@ public sealed class Game
     /// <summary>Jaquette : chemin de fichier local OU URL http(s). Null si aucune.</summary>
     public string? CoverPath { get; set; }
 
+    /// <summary>Grande image de fond (bannière « hero ») : fichier local OU URL http(s). Null si aucune.</summary>
+    public string? HeroPath { get; set; }
+
+    /// <summary>Logo du jeu sur fond transparent : fichier local OU URL http(s). Null si aucun.</summary>
+    public string? LogoPath { get; set; }
+
     /// <summary>Taille sur disque en octets, si la boutique la fournit sans parcourir le disque.</summary>
     public long? SizeBytes { get; set; }
+
+    /// <summary>Temps de jeu total connu de la boutique, en secondes (ex. compteur Steam). Null si inconnu.</summary>
+    public long? StorePlaytimeSeconds { get; set; }
+
+    /// <summary>Dernier lancement connu de la boutique. Null si inconnu.</summary>
+    public DateTime? StoreLastPlayed { get; set; }
 
     // ---- Champs utilisateur (préservés d'un scan à l'autre) ----
 

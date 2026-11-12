@@ -85,11 +85,18 @@ public sealed class LibraryStore
                 existing.LaunchArguments = found.LaunchArguments;
                 existing.SizeBytes = found.SizeBytes ?? existing.SizeBytes;
                 existing.CoverPath = found.CoverPath ?? existing.CoverPath;
+                existing.HeroPath = found.HeroPath ?? existing.HeroPath;
+                existing.LogoPath = found.LogoPath ?? existing.LogoPath;
+                existing.StorePlaytimeSeconds = found.StorePlaytimeSeconds ?? existing.StorePlaytimeSeconds;
+                existing.StoreLastPlayed = found.StoreLastPlayed ?? existing.StoreLastPlayed;
+                if (found.StoreLastPlayed > (existing.LastPlayed ?? DateTime.MinValue))
+                    existing.LastPlayed = found.StoreLastPlayed;
                 updated++;
             }
             else
             {
                 found.AddedAt = DateTime.Now;
+                found.LastPlayed = found.StoreLastPlayed;
                 _games.Add(found);
                 added.Add(found);
             }
