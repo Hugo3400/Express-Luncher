@@ -1,0 +1,48 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]64/
+publish/
+artifacts/
+*.pdb
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+
+# Tests and coverage
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+coverage*.xml
+
+# Logs and local settings
+*.log
+*.tmp
+.env
+.env.*
+appsettings.*.local.json
+secrets.json
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
